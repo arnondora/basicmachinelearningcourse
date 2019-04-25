@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold, cross_validate, cross_val_predict
 from sklearn.naive_bayes import BernoulliNB
 from sklearn import svm
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 
@@ -24,6 +25,9 @@ naive_bayes_model.fit(X_train, y_train)
 svm_model = svm.SVC(kernel='linear')
 svm_model.fit(X_train, y_train)
 
+# Decision Tree
+tree_model = DecisionTreeClassifier()
+tree_model.fit(X_train, y_train)
 
 # Gradient Boosting
 gradient_boosting_model = GradientBoostingClassifier()
@@ -39,10 +43,11 @@ print(classification_report(y_test, gradient_boosting_model.predict(X_test)))
 
 print(accuracy_score(y_test, naive_bayes_model.predict(X_test)))
 print(accuracy_score(y_test, svm_model.predict(X_test)))
+print(accuracy_score(y_test, tree_model.predict(X_test)))
 print(accuracy_score(y_test, gradient_boosting_model.predict(X_test)))
 
-algorithm_name = ['Naive Bayes', 'SVM', 'Gradient Boosting']
-accuracys = [accuracy_score(y_test, naive_bayes_model.predict(X_test)), accuracy_score(y_test, svm_model.predict(X_test)), accuracy_score(y_test, gradient_boosting_model.predict(X_test))]
+algorithm_name = ['Naive Bayes', 'SVM', 'Decision Tree', 'Gradient Boosting']
+accuracys = [accuracy_score(y_test, naive_bayes_model.predict(X_test)), accuracy_score(y_test, svm_model.predict(X_test)), accuracy_score(y_test, tree_model.predict(X_test)), accuracy_score(y_test, gradient_boosting_model.predict(X_test))]
 
 sns.set()
 sns.barplot(x=algorithm_name, y=accuracys)
